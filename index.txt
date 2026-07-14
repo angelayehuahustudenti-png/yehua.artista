@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>胡烨华 | HU ANGELA YEHUA - Minimal Art Portfolio</title>
+    
+    <!-- 极速预加载：强制浏览器第一时间下载顶部最大封面图 -->
+    <link rel="preload" as="image" href="https://bee-mbr-ab.imglnk.cn/v/51043fc324a83931f5d62bba128de628.webp">
+    
+    <!-- 增加预连接以加速字体与外部资源加载 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://bee-reg-ab.imagency.cn">
+    <link rel="preconnect" href="https://bee-mbr-ab.imglnk.cn">
+    <!-- 预连接 Tailwind CDN 加速脚本下载 -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    <!-- 加载 Tailwind CSS 框架 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入高阶衬线字体与优雅中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F5F2EB; /* 温暖舒适的画廊纸张底色 */
+            scroll-behavior: smooth;
+        }
+        .font-serif-art { 
+            font-family: 'Noto Serif SC', 'Playfair Display', serif; 
+        }
+
+        /* 极简入场线条动画 */
+        @keyframes growLine {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        .line-animation {
+            animation: growLine 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* 呼吸感引导角标动画 */
+        .breath {
+            animation: breathing 2.5s ease-in-out infinite;
+        }
+        @keyframes breathing {
+            0% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-4px); }
+            100% { opacity: 0.3; transform: translateY(0); }
+        }
+
+        /* 高级骨架屏加载闪烁效果 (替代白屏卡顿) */
+        .skeleton-bg {
+            background: linear-gradient(90deg, #e5e2db 25%, #f2efe9 50%, #e5e2db 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+        .skeleton-bg-dark {
+            background: linear-gradient(90deg, #292524 25%, #44403c 50%, #292524 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* 首页大图专属 */
+        .home-hero-img {
+            transition: filter 1.5s cubic-bezier(0.25, 1, 0.5, 1), transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease-out;
+            filter: grayscale(100%);
+        }
+        .home-hero-img:hover {
+            transform: scale(1.02);
+        }
+        .home-hero-img.keep-color {
+            filter: grayscale(0%) !important;
+        }
+
+        /* 普通作品图灰度与彩色平滑过渡及淡入 */
+        .grayscale-img {
+            transition: filter 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
+            filter: grayscale(100%);
+        }
+        .grayscale-img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        /* 语言与筛选器激活状态下划线 */
+        .active-lang, .active-filter {
+            opacity: 1 !important;
+            font-weight: 500;
+            border-bottom: 1.5px solid #292524;
+        }
+
+        /* 文本与卡片淡入淡出动画 */
+        .fade-transition {
+            transition: opacity 0.4s ease;
+        }
+        
+        .work-card {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: cardFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes cardFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 汉堡菜单微交互动效 */
+        .burger-line {
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, width 0.4s ease;
+        }
+        .menu-open .burger-top {
+            transform: translateY(6px) rotate(45deg);
+            width: 24px !important;
+        }
+        .menu-open .burger-bottom {
+            transform: translateY(-6px) rotate(-45deg);
+            width: 24px !important;
+        }
+
+        /* 灯箱大图悬浮放大镜 */
+        .zoom-container {
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+        .zoom-img {
+            transition: transform 0.15s ease-out, opacity 0.4s ease-out;
+            transform-origin: center center;
+        }
+
+        /* 封面浮现标题动画 */
+        .mogu-overlay {
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            background-color: rgba(245, 242, 235, 0.96); 
+        }
+    </style>
+</head>
+<body class="text-stone-800 overflow-x-hidden">
+
+    <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F5F2EB] transition-opacity duration-500">
+        <div class="w-1/4 md:w-1/6 mb-4">
+            <div class="line-animation h-[1px] bg-stone-800"></div>
+        </div>
+        <h2 id="welcome-text" class="text-lg md:text-xl font-serif-art font-light tracking-widest opacity-0 transition-opacity duration-500 text-stone-600">
+            展览开幕 · Opening
+        </h2>
+    </div>
+
+    <nav class="md:hidden fixed top-0 w-full p-6 flex justify-between items-center z-40 bg-[#F5F2EB]/80 backdrop-blur-md border-b border-stone-300/10">
+        <a href="#home" class="text-base font-medium tracking-widest text-stone-900 transition-colors duration-300 font-serif-art" id="nav-logo">胡烨华</a>
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-1.5 text-[10px] tracking-widest font-light text-stone-600">
+                <button onclick="changeLanguage('zh')" id="lang-zh" class="lang-btn active-lang pb-0.5 opacity-40 hover:opacity-100 transition-opacity">ZH</button>
+                <span class="text-stone-300">/</span>
+                <button onclick="changeLanguage('it')" id="lang-it" class="lang-btn pb-0.5 opacity-40 hover:opacity-100 transition-opacity">IT</button>
+                <span class="text-stone-300">/</span>
+                <button onclick="changeLanguage('en')" id="lang-en" class="lang-btn pb-0.5 opacity-40 hover:opacity-100 transition-opacity">EN</button>
+            </div>
+            <button id="menu-btn" onclick="toggleMenu()" class="relative z-50 flex flex-col justify-between w-6 h-3.5 focus:outline-none" aria-label="Toggle Menu">
+                <span class="burger-line burger-top block h-[1.5px] bg-stone-800 self-end" style="width: 24px;"></span>
+                <span class="burger-line burger-bottom block h-[1.5px] bg-stone-800 self-end" style="width: 16px;"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="menu-backdrop" onclick="toggleMenu()" class="md:hidden fixed inset-0 z-45 bg-stone-900/10 opacity-0 pointer-events-none transition-opacity duration-500"></div>
+    <div id="menu-drawer" class="md:hidden fixed top-0 left-0 h-full w-[280px] z-50 bg-[#F5F2EB] border-r border-stone-300/20 p-8 shadow-2xl transform -translate-x-full transition-transform duration-500 cubic-bezier(0.25, 1, 0.5, 1)">
+        <div class="flex flex-col h-full justify-between pt-16 pb-8">
+            <div class="flex flex-col space-y-8">
+                <span class="text-[10px] uppercase tracking-widest text-stone-400 font-light" id="menu-label-explore">探索 / Explore</span>
+                <nav class="flex flex-col space-y-6">
+                    <a href="#home" onclick="toggleMenu()" class="font-serif-art text-2xl font-light hover:text-stone-500 transition-colors" id="menu-home">首页</a>
+                    <a href="#works" onclick="toggleMenu()" class="font-serif-art text-2xl font-light hover:text-stone-500 transition-colors" id="menu-works">个人作品</a>
+                    <a href="#about" onclick="toggleMenu()" class="font-serif-art text-2xl font-light hover:text-stone-500 transition-colors" id="menu-about">关于</a>
+                    <a href="#contact" onclick="toggleMenu()" class="font-serif-art text-2xl font-light hover:text-stone-500 transition-colors" id="menu-contact">联系</a>
+                </nav>
+            </div>
+            <div class="text-[9px] tracking-widest text-stone-400 uppercase font-light">© 2026 HU ANGELA YEHUA.</div>
+        </div>
+    </div>
+
+    <aside class="hidden md:flex flex-col justify-between fixed top-0 left-0 h-screen w-72 lg:w-80 p-12 bg-[#F5F2EB] border-r border-stone-300/30 z-30">
+        <div class="space-y-16">
+            <a href="#home" class="block text-xl font-medium tracking-widest text-stone-900 font-serif-art" id="sidebar-logo">胡烨华</a>
+            <nav class="flex flex-col space-y-6">
+                <a href="#home" class="font-serif-art text-lg font-light hover:text-stone-500 transition-colors text-stone-800" id="sidebar-home">首页</a>
+                <a href="#works" class="font-serif-art text-lg font-light hover:text-stone-500 transition-colors text-stone-800" id="sidebar-works">个人作品</a>
+                <a href="#about" class="font-serif-art text-lg font-light hover:text-stone-500 transition-colors text-stone-800" id="sidebar-about">关于</a>
+                <a href="#contact" class="font-serif-art text-lg font-light hover:text-stone-500 transition-colors text-stone-800" id="sidebar-contact">联系</a>
+            </nav>
+        </div>
+        <div class="space-y-8">
+            <div class="flex items-center space-x-2 text-[10px] tracking-widest font-light text-stone-600">
+                <button onclick="changeLanguage('zh')" id="sidebar-lang-zh" class="lang-btn active-lang pb-0.5 opacity-40 hover:opacity-100 transition-opacity">ZH</button>
+                <span class="text-stone-300">/</span>
+                <button onclick="changeLanguage('it')" id="sidebar-lang-it" class="lang-btn pb-0.5 opacity-40 hover:opacity-100 transition-opacity">IT</button>
+                <span class="text-stone-300">/</span>
+                <button onclick="changeLanguage('en')" id="sidebar-lang-en" class="lang-btn pb-0.5 opacity-40 hover:opacity-100 transition-opacity">EN</button>
+            </div>
+            <div class="text-[9px] tracking-widest text-stone-400 uppercase font-light leading-relaxed">© 2026 HU ANGELA YEHUA.<br>ALL RIGHTS RESERVED.</div>
+        </div>
+    </aside>
+
+    <div class="w-full md:pl-72 lg:pl-80 min-h-screen">
+        
+        <!-- Home Hero Section -->
+        <section id="home" class="w-full flex flex-col items-center justify-center px-6 pt-32 pb-16 md:pt-40 md:pb-24 xl:pt-48">
+            <div class="w-full max-w-5xl xl:max-w-6xl 2xl:max-w-7xl overflow-hidden rounded-lg skeleton-bg shadow-sm border border-stone-200/50" id="hero-img-wrapper">
+                <img id="home-main-img" src="https://bee-mbr-ab.imglnk.cn/v/51043fc324a83931f5d62bba128de628.webp" alt="Artistic Craftsmanship - HU ANGELA YEHUA" class="home-hero-img w-full h-[50vh] md:h-[60vh] xl:h-[70vh] 2xl:h-[75vh] object-cover rounded-lg opacity-0" fetchpriority="high" decoding="async" onload="this.classList.remove('opacity-0'); document.getElementById('hero-img-wrapper').classList.remove('skeleton-bg');" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
+            </div>
+            <div class="mt-8 md:mt-12 w-full max-w-5xl xl:max-w-6xl 2xl:max-w-7xl text-left px-2 xl:px-0">
+                <h1 id="cover-text" class="font-serif-art text-xs sm:text-sm md:text-base xl:text-lg 2xl:text-xl leading-relaxed text-stone-700 tracking-wide max-w-2xl xl:max-w-3xl 2xl:max-w-4xl fade-transition font-light">
+                    你好！欢迎来到我的艺术世界；这里崇尚色彩、形状和对细节的关注。
+                </h1>
+            </div>
+        </section>
+
+        <!-- Works Section -->
+        <section id="works" class="py-24 px-6 md:px-16 lg:px-24 xl:px-32 border-t border-stone-300/30">
+            <div class="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
+                
+                <!-- Main Portfolio View -->
+                <div id="main-portfolio-view" class="fade-transition">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline mb-8">
+                        <h2 class="font-serif-art text-xl md:text-2xl font-light text-stone-900 mb-2 sm:mb-0" id="sec-works-title">选作 / Works</h2>
+                        <span class="text-[10px] tracking-widest text-stone-400 uppercase font-light">SELECTED PORTFOLIO</span>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs md:text-sm font-light text-stone-500 mb-12 border-b border-stone-300/20 pb-4">
+                        <button onclick="filterWorks('printmaking')" id="filter-printmaking" class="filter-btn active-filter pb-1 hover:text-stone-800 transition-colors uppercase tracking-wider">版画</button>
+                        <button onclick="filterWorks('collage')" id="filter-collage" class="filter-btn pb-1 hover:text-stone-800 transition-colors uppercase tracking-wider">拼贴</button>
+                        <button onclick="filterWorks('illustration')" id="filter-illustration" class="filter-btn pb-1 hover:text-stone-800 transition-colors uppercase tracking-wider">书籍插画</button>
+                        <button onclick="filterWorks('experimental')" id="filter-experimental" class="filter-btn pb-1 hover:text-stone-800 transition-colors uppercase tracking-wider">实验性尝试</button>
+                    </div>
+                    
+                    <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 fade-transition">
+                        <!-- JS Dynamically Injects Cards -->
+                    </div>
+                </div>
+
+                <div id="album-view" class="hidden fade-transition">
+                    <div class="flex items-center justify-between mb-8 pb-4 border-b border-stone-300/20">
+                        <button onclick="exitAlbum()" class="flex items-center text-xs md:text-sm text-stone-500 hover:text-stone-950 transition-colors focus:outline-none">
+                            <span class="mr-2">←</span> <span id="back-to-portfolio-text">返回所有作品</span>
+                        </button>
+                        <span class="text-[10px] tracking-widest text-stone-400 uppercase font-light">COLLECTION DEBUT</span>
+                    </div>
+
+                    <div class="mb-16 text-left max-w-2xl space-y-6">
+                        <h2 class="font-serif-art text-2xl md:text-3xl font-light text-stone-900 mb-4" id="album-main-title">展签标题</h2>
+                        <p class="text-xs text-stone-500 font-light leading-relaxed mb-6" id="album-main-desc">
+                            展签描述...
+                        </p>
+                        
+                        <div class="pt-6 border-t border-stone-300/20 fade-transition">
+                            <span class="text-[9px] uppercase tracking-widest text-stone-400 font-light block mb-3" id="album-concept-subtitle">创作自白 / Artist Statement</span>
+                            <h3 class="font-serif-art text-sm font-normal text-stone-800 mb-3" id="album-concept-title">初衷标题</h3>
+                            <p class="text-xs text-stone-600 font-light leading-relaxed max-w-xl" id="album-concept-desc">
+                                初衷文字...
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="album-grid" class="columns-1 sm:columns-2 md:columns-3 gap-8 space-y-8">
+                        <!-- JS Dynamically Injects Grid Items -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 px-6 md:px-16 lg:px-24 xl:px-32 bg-[#EFECE4] border-t border-stone-300/30">
+            <div class="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 xl:gap-20 items-center">
+                <div class="md:col-span-7 space-y-6 xl:space-y-8">
+                    <span class="text-[10px] xl:text-xs uppercase tracking-widest text-stone-400 font-light" id="about-subtitle">艺术家简介 / Profile</span>
+                    <h2 class="font-serif-art text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-stone-900" id="about-title">嗨，我是胡烨华！</h2>
+                    <p class="font-light text-stone-600 leading-relaxed text-xs md:text-sm xl:text-base 2xl:text-lg max-w-xl xl:max-w-2xl" id="about-desc">
+                        我是一名热爱和美相关的艺术家。<br><br>我喜欢绘画和手工的一点是，它既能表达困难和挑战，又能蕴含巨大的快乐和趣味。我曾在博洛尼亚美院学习艺术版画，在意大利多次参加展览。画画这一件事一直贯穿我现有的大半人生，我希望保持初心一直坚持下去。<br><br>艺术帮助生命成为自己，我想把这一份感受传给我能接触到的人们。
+                    </p>
+                </div>
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="w-48 h-48 md:w-64 md:h-64 xl:w-80 xl:h-80 2xl:w-[26rem] 2xl:h-[26rem] rounded-full overflow-hidden border border-stone-300 shadow-xl flex items-center justify-center bg-stone-200 skeleton-bg" id="avatar-wrapper">
+                        <img src="https://bee-mbr-ab.imglnk.cn/v/fddc81de9f5393f89596776cd850a59b.webp" alt="HU ANGELA YEHUA" class="w-full h-full object-cover transition-all duration-700 hover:scale-105 filter contrast-[0.95] sepia-[0.15] opacity-0" loading="lazy" decoding="async" onload="this.classList.remove('opacity-0'); document.getElementById('avatar-wrapper').classList.remove('skeleton-bg');" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-6 md:px-16 lg:px-24 xl:px-32 border-t border-stone-300/20">
+            <div class="max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto text-center space-y-12">
+                <h2 class="font-serif-art text-xl md:text-2xl xl:text-3xl font-light text-stone-900" id="contact-title">开启共创计划</h2>
+                <p class="font-light text-stone-500 max-w-md xl:max-w-lg mx-auto text-xs xl:text-sm leading-relaxed" id="contact-desc">
+                    无论是一项展览邀约、特定场域创作，还是只是喝杯咖啡聊聊想法，随时欢迎您的来信。
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-2xl xl:max-w-4xl mx-auto pt-6 text-xs sm:text-sm xl:text-base">
+                    <a href="https://xhslink.com/m/8BiwkBwIH7S" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-4 border border-stone-300 hover:border-stone-800 hover:bg-stone-800/5 transition-all duration-300 font-serif-art text-stone-800 rounded-lg">
+                        <span class="tracking-wider fade-transition" id="contact-xhs-text">小红书</span>
+                    </a>
+                    <a href="https://www.instagram.com/angela_yehua/?hl=it" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-4 border border-stone-300 hover:border-stone-800 hover:bg-stone-800/5 transition-all duration-300 font-serif-art text-stone-800 rounded-lg">
+                        <span class="tracking-wider">Instagram</span>
+                    </a>
+                    <button onclick="toggleWeChatModal(true)" class="flex items-center justify-center p-4 border border-stone-300 hover:border-stone-800 hover:bg-stone-800/5 transition-all duration-300 font-serif-art text-stone-800 rounded-lg cursor-pointer">
+                        <span class="tracking-wider fade-transition" id="contact-wechat-text">微信</span>
+                    </button>
+                    <div onclick="copyEmailAddress()" class="flex flex-col items-center justify-center p-4 border border-stone-300 hover:border-stone-800 hover:bg-stone-800/5 transition-all duration-300 rounded-lg group cursor-pointer relative">
+                        <span class="text-[9px] uppercase tracking-widest text-stone-400 mb-1 font-light fade-transition" id="contact-email-label">电子邮箱</span>
+                        <span class="font-serif-art text-[10px] md:text-[11px] lg:text-xs tracking-wide text-stone-800 break-all text-center leading-tight group-hover:underline">angelayehua.hu.studenti@ababo.it</span>
+                        <span id="copy-toast" class="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-stone-900 text-[#F5F2EB] text-[9px] tracking-widest py-1.5 px-3 rounded shadow-md opacity-0 transition-opacity duration-300 pointer-events-none whitespace-nowrap font-light">已复制到剪贴板</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="wechat-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm">
+        <div class="bg-[#F5F2EB] p-8 rounded-lg shadow-2xl max-w-[280px] w-full border border-stone-300/40 text-center relative mx-4 transform scale-95 transition-transform duration-300" id="wechat-modal-content">
+            <button onclick="toggleWeChatModal(false)" class="absolute top-4 right-4 text-stone-400 hover:text-stone-800 transition-colors focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 class="font-serif-art text-sm font-light tracking-wider text-stone-800 mb-4" id="wechat-modal-title">扫描微信二维码</h3>
+            <div class="bg-white p-4 rounded border border-stone-300/20 aspect-square flex items-center justify-center overflow-hidden mb-4 skeleton-bg" id="qr-wrapper">
+                <img id="wechat-qr-img" src="https://bee-reg-ab.imagency.cn/e/86b70dc61470b3b28aa4a62ed7bd4b62.png" alt="我的微信二维码" class="max-w-full h-auto object-contain rounded-md opacity-0 transition-opacity duration-500" style="max-width: 200px; max-height: 200px;" loading="lazy" decoding="async" onload="this.classList.remove('opacity-0'); document.getElementById('qr-wrapper').classList.remove('skeleton-bg');" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
+            </div>
+            <p class="text-[10px] text-stone-400 font-light leading-relaxed" id="wechat-modal-desc">使用微信扫一扫，开启共创交流</p>
+        </div>
+    </div>
+
+    <!-- 灯箱添加了骨架屏支撑 -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-stone-950/95 flex flex-col justify-between p-6 md:p-12 animate-fade text-[#F5F2EB]">
+        <div class="flex justify-between items-center w-full z-10">
+            <span class="text-[10px] tracking-widest font-light text-stone-400 uppercase" id="lightbox-genre">Art Spec</span>
+            <button onclick="closeLightbox()" class="text-stone-400 hover:text-white transition-colors focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="flex-1 w-full flex items-center justify-center py-6 overflow-hidden relative">
+            <button id="lightbox-prev-btn" onclick="navigateLightbox(-1)" class="absolute left-2 md:left-8 text-stone-400 hover:text-white transition-colors focus:outline-none z-20 bg-stone-900/30 p-2.5 md:p-4 rounded-full hover:bg-stone-900/70 backdrop-blur-xs">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <div class="zoom-container max-w-4xl w-full h-[70vh] rounded-lg border border-white/5 bg-stone-900 flex items-center justify-center skeleton-bg-dark" id="lightbox-img-wrapper" onmousemove="zoomImage(event)" onmouseleave="resetZoom()">
+                <img id="lightbox-img" src="" alt="Detail View" class="zoom-img max-w-full max-h-[70vh] object-contain rounded-lg opacity-0 transition-opacity duration-300">
+            </div>
+            <button id="lightbox-next-btn" onclick="navigateLightbox(1)" class="absolute right-2 md:right-8 text-stone-400 hover:text-white transition-colors focus:outline-none z-20 bg-stone-900/30 p-2.5 md:p-4 rounded-full hover:bg-stone-900/70 backdrop-blur-xs">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+        <div class="text-center space-y-2 z-10">
+            <h3 class="font-serif-art text-base md:text-lg tracking-wide font-light text-white" id="lightbox-title">作品名称</h3>
+            <p class="text-[10px] tracking-widest text-stone-400 font-light" id="lightbox-meta">2026</p>
+        </div>
+    </div>
+
+    <div id="scroll-indicator" class="fixed bottom-10 right-10 z-30 breath flex flex-col items-end pointer-events-auto cursor-pointer">
+        <div id="scroll-lines-box" class="relative w-10 h-10 mb-2 transition-transform duration-500 ease-out origin-center">
+            <div class="absolute bottom-0 right-0 w-10 h-[1.2px] bg-stone-700"></div>
+            <div class="absolute bottom-0 right-0 w-[1.2px] h-10 bg-stone-700"></div>
+        </div>
+        <span id="scroll-text" class="text-[9px] uppercase tracking-widest text-stone-500 font-light mr-1">向下滚动</span>
+    </div>
+
+    <script>
+        let currentAlbumId = 'marcovaldo'; 
+
+        const artworks = [
+            {
+                id: 'marcovaldo', 
+                category: 'illustration',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/c890c1102294a86ffb0b0c7a21be23f0.webp', 
+                isAlbum: true, 
+                aspect: 'aspect-auto',
+                title: { zh: '书籍插画：马可瓦尔多 (20 幅插图)', it: 'Illustrazione: Marcovaldo (20 Illustrazioni)', en: 'Book Illustration: Marcovaldo (20 Illustrative Plates)' },
+                year: '2025 - 2026'
+            },
+            {
+                id: 'magazine',
+                category: 'illustration',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/f74bdf507aaaee19186f05c543db9aac.webp', 
+                isAlbum: true, 
+                aspect: 'aspect-auto', 
+                title: { zh: '《杂志插画》', it: 'Illustrazione per Riviste', en: 'Magazine Editorial Illustration' },
+                year: '' 
+            },
+            {
+                id: 'zine',
+                category: 'illustration',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/e0f5eb932c9639e5113ada923d0a2b63.webp', 
+                isAlbum: true, 
+                aspect: 'aspect-auto', 
+                title: { zh: '《Zine》独立艺术出版', it: 'Progetto Zine Indipendente', en: 'Independent Zine Publication' },
+                year: '2022 - 2024'
+            },
+            {
+                id: 'printmaking_dawn',
+                category: 'printmaking',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/4d8d02781e4d14af21d260d9eb1d4dcb.webp',
+                isAlbum: true,
+                aspect: 'aspect-auto',
+                title: { zh: '人工黎明', it: "L'Alba Artificiale", en: 'Artificial Dawn' },
+                year: '2026'
+            },
+            {
+                id: 'printmaking_seasons',
+                category: 'printmaking',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/2a511695beef55f997a945713be38759.webp',
+                isAlbum: true,
+                aspect: 'aspect-auto',
+                title: { zh: '四季', it: 'Le Quattro Stagioni', en: 'Four Seasons' },
+                year: '2026'
+            },
+            {
+                id: 'printmaking_fireworks',
+                category: 'printmaking',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/064d3f94f80f9eb7d7bd9ab5ca57fac2.webp',
+                isAlbum: true,
+                aspect: 'aspect-auto',
+                title: { zh: '烟花', it: 'Fuochi d\'Artificio', en: 'Fireworks' },
+                year: '2024'
+            },
+            {
+                id: 'printmaking_another_lang',
+                category: 'printmaking',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/6c0473b745be727fb24d7767e6f987bd.webp',
+                aspect: 'aspect-auto',
+                title: { zh: '在另一种语言', it: 'In altre parole', en: 'In Another Language' },
+                year: '2025'
+            },
+            {
+                id: 'printmaking_combined',
+                category: 'printmaking',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/855d43f2b0686f3925ac7db84c95c10e.webp',
+                isAlbum: true,
+                aspect: 'aspect-auto',
+                title: { zh: '综合', it: 'Tecnica Mista', en: 'Combined Media' },
+                year: '2023 - 2025'
+            },
+            {
+                id: 'collage_handcraft',
+                category: 'collage',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/b0711fc222041f03538562de620a7cf8.webp', 
+                isAlbum: true,
+                aspect: 'aspect-auto',
+                title: { zh: '手作时刻', it: 'Momento Fatto a Mano', en: 'Handcraft Moment' },
+                year: { zh: '2023 - 至今', it: '2023 - Presente', en: '2023 - Present' }
+            },
+            {
+                id: 'exp_mixed_media',
+                category: 'experimental',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/488e5c912d06eb547755b28327855037.webp', 
+                title: { zh: '综合材料', it: 'Tecnica Mista', en: 'Mixed Media' },
+                year: ''
+            },
+            {
+                id: 'exp_record_obs',
+                category: 'experimental',
+                img: 'https://bee-mbr-ab.imglnk.cn/v/db878cdbb98532507ddfca15f1825f7f.webp',
+                isAlbum: true,
+                aspect: 'aspect-auto',
+                title: { zh: '记录与观察', it: 'Registrazione e Osservazione', en: 'Record & Observation' },
+                year: '' 
+            }
+        ];
+
+        const marcovaldoIllustrations = [
+            { id: 101, ch: "01", season: "春", img: "https://bee-mbr-ab.imglnk.cn/v/c64fdce337acbe973397200fce051d73.webp", title: { zh: "1. 城市里的双孢菇", it: "1. Funghi in città", en: "1. Mushrooms in the City" } },
+            { id: 102, ch: "02", season: "夏", img: "https://bee-mbr-ab.imglnk.cn/v/b54c8ddd9d19f9bf6a08fda4150777ca.webp", title: { zh: "2. 长椅上的度假", it: "2. La villeggiata in panchina", en: "2. Vacation on a Bench" } },
+            { id: 103, ch: "03", season: "秋", img: "https://bee-mbr-ab.imglnk.cn/v/c890c1102294a86ffb0b0c7a21be23f0.webp", title: { zh: "3. 公园里的鸽子", it: "3. Il piccione comunale", en: "3. The Municipal Pigeon" } },
+            { id: 104, ch: "04", season: "冬", img: "https://bee-mbr-ab.imglnk.cn/v/29963638ec0e2bbf20bb83b207dc74f8.webp", title: { zh: "4. 雪地迷失的城市", it: "4. La città smarrita nella neve", en: "4. City Lost in the Snow" } },
+            { id: 105, ch: "05", season: "春", img: "https://bee-mbr-ab.imglnk.cn/v/4f2933d9fdde01a8518da8bb4db8d45b.webp", title: { zh: "5. 黄蜂疗法", it: "5. La cura vespe", en: "5. The Wasp Cure" } },
+            { id: 106, ch: "06", season: "夏", img: "https://bee-mbr-ab.imglnk.cn/v/f097677c41665bc260e51ef9b551465c.webp", title: { zh: "6. 阳光沙子周六", it: "6. Un sabato di sole, sabbia...", en: "6. A Saturday of Sun, Sand..." } },
+            { id: 107, ch: "07", season: "秋", img: "https://bee-mbr-ab.imglnk.cn/v/d913ae2d3f76a7f980d6806970fc88ac.webp", title: { zh: "7. 午餐盒的交响", it: "7. La pietanza", en: "7. The Lunch-Box" } },
+            { id: 108, ch: "08", season: "冬", img: "https://bee-mbr-ab.imglnk.cn/v/98139a7233e00d831054f26c8f7b454f.webp", title: { zh: "8. 高速公路小树林", it: "8. Il bosco sull'autostrada", en: "8. Forest on the Superhighway" } },
+            { id: 109, ch: "09", season: "春", img: "https://bee-mbr-ab.imglnk.cn/v/d6ae77f8dc0dbde073a1cc48f5693ab2.webp", title: { zh: "9. 寻觅好空气", it: "9. L'aria buona", en: "9. Looking for Good Air" } },
+            { id: 110, ch: "10", season: "夏", img: "https://bee-mbr-ab.imglnk.cn/v/c5b32f3aeb4de05f95028ed33ecd03e4.webp", title: { zh: "10. 与奶牛结伴旅行", it: "10. Un viaggio con le mucche", en: "10. A Trip with the Cows" } },
+            { id: 111, ch: "11", season: "秋", img: "https://bee-mbr-ab.imglnk.cn/v/74a034026437a4e10474b9f4dd71e2fa.webp", title: { zh: "11. 有毒的兔子", it: "11. Il coniglio velenoso", en: "11. The Poisonous Rabbit" } },
+            { id: 112, ch: "12", season: "冬", img: "https://bee-mbr-ab.imglnk.cn/v/c8522397b59d359b933ec008483e4fec.webp", title: { zh: "12. 走错的车站", it: "12. La fermata sbagliata", en: "12. The Wrong Stop" } },
+            { id: 113, ch: "13", season: "春", img: "https://bee-mbr-ab.imglnk.cn/v/e748317c613875afe7b856c9e2ec8edc.webp", title: { zh: "13. 哪里河水更蓝", it: "13. Dov'è più azzurro il fiume", en: "13. Where the River is Bluer" } },
+            { id: 114, ch: "14", season: "夏", img: "https://bee-mbr-ab.imglnk.cn/v/24a838366f1751d82233b9a28d2ca61b.webp", title: { zh: "14. 月亮与尼阿克", it: "14. Luna e Gnac", en: "14. Moon and Gnac" } },
+            { id: 115, ch: "15", season: "秋", img: "https://bee-mbr-ab.imglnk.cn/v/9762116f1dfb9098cf464f6a0be9b229.webp", title: { zh: "15. 雨与落叶的缠绕", it: "15. La pioggia e le foglie", en: "15. Rain and Leaves" } },
+            { id: 116, ch: "16", season: "冬", img: "https://bee-mbr-ab.imglnk.cn/v/73f86d0a4c3bc1bf6dac28395909d6e4.webp", title: { zh: "16. 圣诞老人的夜晚", it: "16. La notte dei Babbi Natale", en: "16. Night of the Santa Clauses" } },
+            { id: 117, ch: "17", season: "春", img: "https://bee-mbr-ab.imglnk.cn/v/9026cc44ea622cad04f08519372a597c.webp", title: { zh: "17. 固执猫的花园", it: "17. Il giardino dei gatti ostinati", en: "17. Garden of Stubborn Cats" } },
+            { id: 118, ch: "18", season: "夏", img: "https://bee-mbr-ab.imglnk.cn/v/f3d008bd08c14fe8d7be8c8b92a38652.webp", title: { zh: "18. 雨水灌入城市", it: "18. La pioggia e la città", en: "18. Rain and the City" } },
+            { id: 119, ch: "19", season: "秋", img: "https://bee-mbr-ab.imglnk.cn/v/9d0f62d790ef2ceef216ba308571108c.webp", title: { zh: "19. 河上的泡沫", it: "19. La schiuma sul fiume", en: "19. Foam on the River" } },
+            { id: 120, ch: "20", season: "冬", img: "https://bee-mbr-ab.imglnk.cn/v/9828d4ed2f446fa93f60b1e4d7188f5a.webp", title: { zh: "20. 圣诞老人的孩子们", it: "20. I figli di Babbo Natale", en: "20. Santa Claus's Children" } }
+        ];
+
+        const magazineProjects = [
+            { id: 801, img: "https://bee-mbr-ab.imglnk.cn/v/422c2551c895718093101a5206861584.webp", title: { zh: "内页 01", it: "Pagina 01", en: "Page 01" } },
+            { id: 802, img: "https://bee-mbr-ab.imglnk.cn/v/c66c7a5e7694047c3c2b6cfcd0256c38.webp", title: { zh: "内页 02", it: "Pagina 02", en: "Page 02" } },
+            { id: 803, img: "https://bee-mbr-ab.imglnk.cn/v/8232252543885a0790d46345a23d239f.webp", title: { zh: "内页 03", it: "Pagina 03", en: "Page 03" } },
+            { id: 804, img: "https://bee-mbr-ab.imglnk.cn/v/ce5c4365ea41d05015aa454f9aa01e16.webp", title: { zh: "内页 04", it: "Pagina 04", en: "Page 04" } },
+            { id: 808, img: "https://bee-mbr-ab.imglnk.cn/v/32b8e5510a1cfbe232a98aba748974d3.webp", title: { zh: "内页 05", it: "Pagina 05", en: "Page 05" } },
+            { id: 805, img: "https://bee-mbr-ab.imglnk.cn/v/0ff2dfaaa73eebc663a6c4000df7c22c.webp", title: { zh: "内页 06", it: "Pagina 06", en: "Page 06" } },
+            { id: 806, img: "https://bee-mbr-ab.imglnk.cn/v/f74bdf507aaaee19186f05c543db9aac.webp", title: { zh: "内页 07", it: "Pagina 07", en: "Page 07" } },
+            { id: 807, img: "https://bee-mbr-ab.imglnk.cn/v/05e95fd589040791bf077afda8932943.webp", title: { zh: "封底", it: "Retro", en: "Back Cover" } }
+        ];
+
+        const zineProjects = [
+            { id: 201, isSubAlbum: true, subAlbumId: 'zine_poetry', img: "https://bee-mbr-ab.imglnk.cn/v/0a140aa39d92ab95b6301167b74fc40f.webp", title: { zh: "诗歌", it: "Poesia", en: "Poetry" } },
+            { id: 202, isDirectLightbox: true, lightboxImg: "https://bee-mbr-ab.imglnk.cn/v/25a6e0d956dc500d76c166ee45347cb3.webp", img: "https://bee-mbr-ab.imglnk.cn/v/5a36db6e9fb50a33261b8d3fd719464f.webp", title: { zh: "漫画", it: "Fumetto", en: "Comic" } }
+        ];
+
+        const zinePoetryProjects = [
+            "https://bee-mbr-ab.imglnk.cn/v/0a140aa39d92ab95b6301167b74fc40f.webp", 
+            "https://bee-mbr-ab.imglnk.cn/v/e0f5eb932c9639e5113ada923d0a2b63.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/114d229ae43501d9d86e7d401cfc2a5b.webp", 
+            "https://bee-mbr-ab.imglnk.cn/v/ebbe6b54a4a62bb8982c296f34d31631.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/0fd6a0341ac8ceae8fb943ba0e728de2.webp", 
+            "https://bee-mbr-ab.imglnk.cn/v/8b0f6b711d3d28cf4a874733c6ccf94a.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/8e3f2439aae9498876083d74ca7402b9.webp", 
+            "https://bee-mbr-ab.imglnk.cn/v/0fdf2312c9ab1c976719033ce08a510a.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/894b887ded134a23174ad5cbf3e437e6.webp"
+        ].map((url, i) => ({ id: 700+i, img: url, title: { zh: `诗歌 ${i+1}`, it: `Poesia ${i+1}`, en: `Poetry ${i+1}` } }));
+
+        const fireworksProjects = [
+            { id: 301, img: "https://bee-mbr-ab.imglnk.cn/v/064d3f94f80f9eb7d7bd9ab5ca57fac2.webp", title: { zh: "烟花 01", it: "Fuochi d'Artificio 01", en: "Fireworks 01" } },
+            { id: 302, img: "https://bee-mbr-ab.imglnk.cn/v/cc01fec6a90d1719a8778abd47de8260.webp", title: { zh: "烟花 02", it: "Fuochi d'Artificio 02", en: "Fireworks 02" } },
+            { id: 303, img: "https://bee-mbr-ab.imglnk.cn/v/f30e367997ae57fa7b30702a3ee74d4a.webp", title: { zh: "烟花 03", it: "Fuochi d'Artificio 03", en: "Fireworks 03" } },
+            { id: 304, img: "https://bee-mbr-ab.imglnk.cn/v/6166fa187dbc5a80210ad3782c4a60c8.webp", title: { zh: "烟花 04", it: "Fuochi d'Artificio 04", en: "Fireworks 04" } }
+        ];
+
+        const dawnProjects = [
+            { id: 401, img: "https://bee-mbr-ab.imglnk.cn/v/4d8d02781e4d14af21d260d9eb1d4dcb.webp", title: { zh: "人工黎明 01", it: "Alba Artificiale 01", en: "Artificial Dawn 01" } },
+            { id: 402, img: "https://bee-mbr-ab.imglnk.cn/v/fe9382eb6b8486db71a7869bf63a4b0a.webp", title: { zh: "人工黎明 02", it: "Alba Artificiale 02", en: "Artificial Dawn 02" } },
+            { id: 403, img: "https://bee-mbr-ab.imglnk.cn/v/ec5b38bb746bfbbce6b5be048b8d61d7.webp", title: { zh: "人工黎明 03", it: "Alba Artificiale 03", en: "Artificial Dawn 03" } },
+            { id: 404, img: "https://bee-mbr-ab.imglnk.cn/v/a59e61c6de878255ae112481208a51df.webp", title: { zh: "人工黎明 04", it: "Alba Artificiale 04", en: "Artificial Dawn 04" } }
+        ];
+
+        const seasonsProjects = [
+            { id: 411, img: "https://bee-mbr-ab.imglnk.cn/v/2a511695beef55f997a945713be38759.webp", title: { zh: "春", it: "Primavera", en: "Spring" } },
+            { id: 412, img: "https://bee-mbr-ab.imglnk.cn/v/3ebca337e6dc1d0ff8cd810dc07fb456.webp", title: { zh: "夏", it: "Estate", en: "Summer" } },
+            { id: 413, img: "https://bee-mbr-ab.imglnk.cn/v/572b15ce347112338bc13907d45dbbab.webp", title: { zh: "秋", it: "Autunno", en: "Autumn" } },
+            { id: 414, img: "https://bee-mbr-ab.imglnk.cn/v/6a75b5357ee4c1f3ad15181668773598.webp", title: { zh: "冬", it: "Inverno", en: "Winter" } }
+        ];
+
+        const combinedProjects = [
+            "https://bee-mbr-ab.imglnk.cn/v/fa088de355e76797e30a9afb7d2d0f70.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/855d43f2b0686f3925ac7db84c95c10e.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/2f2cf343fa1a3020db7f70d7f3a57a4a.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/1a88fc5485b9d35f1e58b305b75f72fb.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/e867e930a08b68ab21d3f2fcfa4aba3e.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/aaeb6b8e6d58fc9e34f6788063d7edeb.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/fec3f0fe28cf85fa21f178e1a4a078ca.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/67f595251a13806176744343ce830d00.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/62f1bd68a052fba34ab0fa7973cb91b8.webp"
+        ].map((url, i) => ({ id: 420+i, img: url, title: { zh: `月亮 ${i+1}`, it: `Luna ${i+1}`, en: `Moon ${i+1}` } }));
+
+        const recordObsProjects = [
+            "https://bee-mbr-ab.imglnk.cn/v/f8a0eb5cff83b36823c9415340e1c0f6.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/73f4dde4d3c55320c15daea00ae0a3bc.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/6d3fb2dac9535dd2644bd84691afad05.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/1817d23a95ef614c6231287a4ee01ced.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/adbd1427c2ceb8dec77e3e6de11cd1d7.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/eca02041bb8e391cb0906e35ad397433.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/db878cdbb98532507ddfca15f1825f7f.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/e3b86886be368a3efc2d1a527d482b88.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/aa3378225ce058c356cbc7057e13e96e.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/112cd8fe17f4ab34e1cbb3dcc2b0cddb.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/7c1dfe6f98b35b96f17ee326d08e34db.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/2602309e17ca24d0cc6e616979227217.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/40e64818b489a1146c976a42062e3adf.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/3599627fcabb384ac3ba3ca7829e4785.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/248b15bf9f3a16d54af727b8d08791f2.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/eb549c9f198249c91304ddbf8a6b06a8.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/f47aba88567584a23b46bd3786a21b3e.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/4d4b88f49d26c287fe7b96699512c86e.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/c15fbbac56a1536a362972f33a3a15bd.webp"
+        ].map((url, i) => ({ id: 600+i, img: url, title: { zh: "", it: "", en: "" } })); 
+
+        const collageUrls = [
+            "https://bee-mbr-ab.imglnk.cn/v/4871a978b4bd7a1e0c1d8bf54d9d34aa.jpg",
+            "https://bee-mbr-ab.imglnk.cn/v/960238794c8e7ca5b8dfb8144f631114.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/935a06dc0e01bd74cbd5d0ac51cae5fe.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/3ff6f01e03b4e8726d679b81647efc60.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/9d544536cc89fbba823677e5ab2b2e4d.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/dd1708fae097002b7d2dfa2f1715d2dc.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/8675fcafe1486592a9b6b8232c7117eb.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/8a7067b1a5e6e5898de08c9f9c972420.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/50f8ae27a7aeb015ee6ff106336cf699.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/9398da0fa51083cbc010a60201b7b38e.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/9b9984bc6b01aef2e1653ef39be3ba62.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/96c752a846171d729f64a5f8d6e8711d.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/2355b3fdb270299177f28af670ec809f.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/022c0e6afde0f04f3dd365ceff53489d.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/dbf2d317f7778b48179bdbde70df5cd5.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/130f796e6abd1a7f08a683d277403725.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/9dba0c87dac385a300e515e611e3a7da.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/29246205539675075956586b95880910.webp",
+            "https://bee-mbr-ab.imglnk.cn/v/8cad040d37a37dd86a37b0ee4b35e964.webp"
+        ];
+        const collageProjects = collageUrls.map((url, i) => ({
+            id: 500 + i, img: url, title: { zh: `拼贴片段 - ${i+1}`, it: `Collage - ${i+1}`, en: `Fragment - ${i+1}` }
+        }));
+
+        const i18n = {
+            zh: {
+                logo: "胡烨华", loader: "展览开幕 · Opening", cover: "你好！欢迎来到我的艺术世界；这里崇尚色彩、形状和对细节的关注。",
+                scroll: "向下滚动", scrollUp: "向上滑动", menuExplore: "探索 / Explore", menuHome: "首页", menuWorks: "个人作品", menuAbout: "关于", menuContact: "联系",
+                filterPrintmaking: "版画", filterCollage: "拼贴", filterIllustration: "书籍插画", filterExperimental: "实验性尝试",
+                secWorksTitle: "选作 / Works", aboutSubtitle: "艺术家简介 / Profile", aboutTitle: "嗨，我是胡烨华！",
+                aboutDesc: "我是一名热爱和美相关的艺术家。<br><br>我喜欢绘画和手工的一点是，它既能表达困难和挑战，又能蕴含巨大的快乐 & 趣味。我曾在博洛尼亚美院学习艺术版画，在意大利多次参加展览。画画这一件事一直贯穿我现有的大半人生，我希望保持初心一直坚持下去。<br><br>艺术帮助生命成为自己，我想把这一份感受传给我能接触到的人们。",
+                contactTitle: "开启共创计划", contactDesc: "无论是一项展览邀约、特定场域创作，还是只是喝杯咖啡聊聊想法，随时欢迎您的来信。",
+                wechatTitle: "扫描微信二维码", wechatDesc: "使用微信扫一扫，开启共创交流", copied: "已复制到剪贴板",
+                contactXhs: "小红书", contactWechat: "微信", contactEmailLabel: "电子邮箱", backToPortfolio: "返回",
+                
+                albums: {
+                    marcovaldo: { title: "《马可瓦尔多》", desc: "对应一年四季的二十个故事，围绕城市环境中的自然、幻想与微小的生活诗意展开。二十幅原创书籍插画。", conceptTitle: "我的创作初衷", conceptDesc: "读完《马可瓦尔多》之后，我心里一直有种挥之不去的感觉。故事结束了，但那个世界好像还在继续。我总觉得，那些在城市缝隙里寻找自然的小瞬间，那些被忽视的诗意，不该就这么消失。<br><br>所以我选择用图像去延续它。我不想简单地“画故事”，而是想把阅读时那种微妙的感受——轻盈的、梦幻的、带着一点点苦涩的——变成可以看见的东西。拼贴和版画成了我的语言，让我能把卡尔维诺文字里的留白和沉默，用另一种方式说出来。<br><br>这对我来说，不是插图，而是一种延续。" },
+                    magazine: { title: "《杂志插画》", desc: "关于女性健康与生理周期的科普插画。", conceptTitle: "为什么月经很重要？ (Perché le mestruazioni sono importanti?)", conceptDesc: "月经是女性健康的指标，因此了解它的运作方式以及何时偏离正常情况，解读身体发出的信号是非常有用的。<br><br><b>让我们从基础开始：什么是月经？</b><br>月经是指覆盖子宫内壁（子宫内膜）的粘膜脱落，伴随不同程度的血液通过阴道流失。在整个生育期（即从初潮到绝经），月经每个月周期性地出现，其持续时间和量相对稳定。<br><br><b>为什么月经很重要？</b><br>作为月经周期的一个阶段，月经与生育能力直接相关。月经流——即从覆盖子宫内部的粘膜表面流失的血液和组织——能够清除上一个周期建立的内层，从而为后续阶段（排卵、着床及受精卵的营养）准备子宫内膜。事实上，在月经周期中，卵巢和子宫每个月都会发生一系列变化，以使卵细胞成熟并为其植入准备合适的“环境”。如果未发生植入，约28天后月经的再次来潮，即表明受精未发生。" },
+                    zine: { title: "《Zine》独立艺术出版", desc: "包含诗歌、漫画与创意书籍的独立艺术出版物集合。", conceptTitle: "纸本的触感", conceptDesc: "独立的印刷品有着独特的呼吸感。我将诗歌、漫画与手工技艺结合，探索纸张作为媒介的情感传递，不只提供视觉插图，更将其视为具有独特物质性的艺术载体。" },
+                    zine_poetry: { title: "《诗歌》Zine 子栏目", desc: "独立出版计划系列之诗歌卷册。", conceptTitle: "视觉与诗意", conceptDesc: "翻阅页面的每一刻，都是一次轻盈的停顿。" },
+                    printmaking_fireworks: { title: "《烟花》", desc: "四个序列瞬时记录。", conceptTitle: "我的创作初衷", conceptDesc: "烟花，是生命在落幕前最后的呼吸。<br><br>我迷恋它那种矛盾的特质——极致的绚烂与极致的短暂。在我的故乡，白日焰火不是庆祝，而是送行。这让我重新理解“死亡”这个词：它不全是悲伤，也可以是一种隆重的、近乎奢侈的致敬。<br><br>于是我试图在锌版上复刻那种柔软，去模拟烟花的炸裂。黑白也好，彩色也好，我更在意的是痕迹本身。" },
+                    printmaking_dawn: { title: "《人工黎明》", desc: "一组探讨人工光源介入的作品。", conceptTitle: "自然光与人造光的边界", conceptDesc: "在光影的研究中，将自然现象与现代城市的人造黎明进行对比，形成一种静谧的叙事。" },
+                    printmaking_seasons: { title: "《四季》", desc: "关于时间流转的版画记录。", conceptTitle: "时间的痕迹", conceptDesc: "春、夏、秋、冬——我关心的不是景物的更替，而是光线在不同时刻落下的方式，以及它如何在纸面上留下温度与密度。" },
+                    printmaking_combined: { title: "《综合》/ 月亮", desc: "综合材质与版画的结合探索。", conceptTitle: "关于月亮", conceptDesc: "爱，是一棵月亮树，一棵月亮树，亲爱的。<br><br>它不结果子，也没有香气， 但它在夜里轻轻发光，像你半梦半醒时的眼睛。<br>它不说话，只在你路过时， 微微晃动枝桠，像是想抱住你，又不敢靠得太近。<br><br>人们说它没有用，但它知道你寂寞的时候总会抬头看它。<br>那就够了。" },
+                    collage_handcraft: { title: "《手作时刻》", desc: "综合材质探索与日常片段的拼贴重组。", conceptTitle: "关于拼贴的自由感", conceptDesc: "因为我爱上时间的重量。" },
+                    exp_record_obs: { title: "《记录与观察》", desc: "关于日常与微小物体的视觉笔记。", conceptTitle: "观看的方式", conceptDesc: "没有任何宏大的叙事，只是记录下那些被忽略的瞬间。" }
+                },
+                seasonSpring: "春", seasonSummer: "夏", seasonAutumn: "秋", seasonWinter: "冬"
+            },
+            it: {
+                logo: "HU ANGELA YEHUA", loader: "Inaugurazione · Aperto", cover: "Ciao! Benvenuto nel mio mondo artistico; qui si celebrano i colori, le forme e l'attenzione ai dettagli.",
+                scroll: "Scorri", scrollUp: "Torna Su", menuExplore: "Esplora / Explore", menuHome: "Inizio", menuWorks: "Opere", menuAbout: "Chi Sono", menuContact: "Contatti",
+                filterPrintmaking: "Incisione", filterCollage: "Collage", filterIllustration: "Illustrazione", filterExperimental: "Disegno Sperimentale",
+                secWorksTitle: "Opere Selezionate", aboutSubtitle: "Profilo dell'Artista", aboutTitle: "Ciao, sono HU ANGELA YEHUA!",
+                aboutDesc: "Sono un'artista appassionata di tutto ciò che riguarda la bellezza.<br><br>Ciò che amo del disegno e dell'artigianato è che sanno esprimere sia la difficoltà che la sfida, racchiudendo al contempo un'immensa gioia e divertimento. Ho studiato Grafica d'Arte presso l'Accademia di Belle Arti di Bologna e ho partecipato a diverse mostre in Italia. Il disegno ha attraversato la maggior parte della mia vita finora, e spero di rimanere fedele alla mia passione iniziale e continuare a perseverare.<br><br>L'arte aiuta la vita a diventare se stessa, e vorrei trasmettere questa sensazione alle persone che incontro.",
+                contactTitle: "Iniziamo un Progetto", contactDesc: "Che si tratti di un invito a una mostra, di un'opera site-specific o semplicemente di un caffè per fare due chiacchiere, sei sempre le benvenuto a scrivermi.",
+                wechatTitle: "Scansiona QR WeChat", wechatDesc: "Usa WeChat per scansionany e connetterti", copied: "Copiato negli appunti",
+                contactXhs: "Xiaohongshu", contactWechat: "WeChat", contactEmailLabel: "Email / Info", backToPortfolio: "Torna",
+                albums: {
+                    marcovaldo: { title: "Marcovaldo", desc: "Venti illustrazioni originali divise nelle quattro stagioni, basate sui racconti di Italo Calvino.", conceptTitle: "Il Mio Intento Creativo", conceptDesc: "Per me, questa non è un'illustrazione, ma una continuazione..." },
+                    magazine: { title: "Illustrazione per Riviste", desc: "Illustrazioni visive sulla salute femminile.", conceptTitle: "Perché le mestruazioni sono importanti?", conceptDesc: "Le mestruazioni sono un indicatore della salute di una donna, pertanto è utile capire come funzionano e quando discostano dalla normalità, interpretando i segnali che il corpo invia.<br><br>Partiamo dalle basi:<br>Cosa sono le mestruazioni? Le mestruazioni consistono nello sfaldamento della mucosa che riveste la parete interna dell'utero (endometrio), accompagnato da una variabile perdita di sangue attraverso la vagina. Le mestruazioni si presentano periodicamente ogni mese nel corso della vita riproduttiva, cioè dal menarca alla menopausa, con durata e quantità abbastanza costanti.<br><br>Perché le mestruazioni sono importanti? Come fase del ciclo mestruale, le mestruazioni sono direttamente correlate alla fertilità. Il flusso mestruale consente di eliminare il rivestimento costruito durante il ciclo mestruale precedente, preparandolo per l'ovulazione, l'annidamento e la nutrizione dell'eventuale uovo fecondato." },
+                    zine: { title: "Progetto Zine Indipendente", desc: "Una raccolta di pubblicazioni d'arte indipendenti.", conceptTitle: "Il Tatto della Carta", conceptDesc: "La stampa indipendente ha un suo respiro." },
+                    zine_poetry: { title: "Poesia Zine", desc: "Collezione visiva.", conceptTitle: "Visivo", conceptDesc: "Tracce di poesia." },
+                    printmaking_fireworks: { title: "Fuochi d'Artificio", desc: "Quattro registrazioni istantanee.", conceptTitle: "Il Mio Intento Creativo", conceptDesc: "I fuochi d'artificio sono l'ultimo respiro della vita prima che cali il sipario..." },
+                    printmaking_dawn: { title: "L'Alba Artificiale", desc: "Studio della luce artificiale nello spazio urbano.", conceptTitle: "Luce e Confini", conceptDesc: "Esplorazione visiva." },
+                    printmaking_seasons: { title: "Le Quattro Stagioni", desc: "Registrazioni delle stagioni.", conceptTitle: "Tracce del Tempo", conceptDesc: "Primavera, estate, autunno, inverno - Non mi interessa il cambio dei paesaggi, ma il modo in cui la luce cade in momenti diversi." },
+                    printmaking_combined: { title: "Tecnica Mista / Luna", desc: "Esplorazione dei materiali misti.", conceptTitle: "Riguardo alla Luna", conceptDesc: "L'amore è un albero lunare..." },
+                    collage_handcraft: { title: "Momento Fatto a Mano", desc: "Esperimenti materici e collage.", conceptTitle: "Senso di Libertà", conceptDesc: "Perché mi sono innamorata del peso del tempo." },
+                    exp_record_obs: { title: "Registrazione e Osservazione", desc: "Appunti visivi.", conceptTitle: "Il Modo di Vedere", conceptDesc: "Nessuna grande narrazione, solo la registrazione dei momenti trascurati." }
+                },
+                seasonSpring: "Primavera", seasonSummer: "Estate", seasonAutumn: "Autunno", seasonWinter: "Inverno"
+            },
+            en: {
+                logo: "HU ANGELA YEHUA", loader: "Opening Exhibition", cover: "Hello! Welcome to my art world; here we celebrate color, shape, and attention to detail.",
+                scroll: "Scroll", scrollUp: "Scroll Up", menuExplore: "Explore", menuHome: "Home", menuWorks: "Works", menuAbout: "About", menuContact: "Contact",
+                filterPrintmaking: "Printmaking", filterCollage: "Collage", filterIllustration: "Illustration", filterExperimental: "Experimental Art",
+                secWorksTitle: "Selected Works", aboutSubtitle: "Artist Profile", aboutTitle: "Hi, I'm HU ANGELA YEHUA!",
+                aboutDesc: "I am an artist passionate about everything related to beauty.<br><br>What I love about drawing and handcrafts is that they can express both difficulty and challenge, while holding immense joy and fun. I studied Artistic Printmaking at the Academy of Fine Arts of Bologna and have exhibited my work multiple times in Italy. Drawing has run through most of my life so far, and I hope to stay true to my original aspiration and persist.<br><br>Art helps life become itself, and I wish to pass this feeling on to the people I connect with.",
+                contactTitle: "Start a Project", contactDesc: "Whether it is an exhibition invitation, a site-specific creation, or simply a coffee to share some thoughts, feel free to reach out anytime.",
+                wechatTitle: "Scan WeChat QR Code", wechatDesc: "Use WeChat to scan and connect for collaboration", copied: "Copied to clipboard",
+                contactXhs: "Xiaohongshu", contactWechat: "WeChat", contactEmailLabel: "Email / Info", backToPortfolio: "Back",
+                albums: {
+                    marcovaldo: { title: "Marcovaldo", desc: "Twenty illustrations following the four seasons of Calvino's stories.", conceptTitle: "My Creative Intent", conceptDesc: "To me, this is not illustration, but a continuation..." },
+                    magazine: { title: "Magazine Editorial Illustration", desc: "Visual illustrations on women's health and the menstrual cycle.", conceptTitle: "Why is menstruation important?", conceptDesc: "Menstruation is an indicator of a woman's health, so it is useful to understand how it works and interpret the signals the body sends.<br><br><b>What is menstruation?</b><br>It consists of the shedding of the mucosa lining the inner wall of the uterus (endometrium), accompanied by blood loss. It occurs periodically every month throughout reproductive life, with fairly constant duration and quantity.<br><br><b>Why is it important?</b><br>As a phase of the menstrual cycle, it is directly related to fertility. The flow clears the lining built during the previous cycle, preparing the endometrium for ovulation, implantation, and nourishment of a fertilized egg." },
+                    zine: { title: "Independent Zine", desc: "A collection of independent art publications.", conceptTitle: "The Touch of Paper", conceptDesc: "Independent printing has a unique breath." },
+                    zine_poetry: { title: "Poetry Zine", desc: "Visual poetry collection.", conceptTitle: "Visuals", conceptDesc: "Traces of poetry." },
+                    printmaking_fireworks: { title: "Fireworks", desc: "Four sequential records.", conceptTitle: "My Creative Intent", conceptDesc: "Fireworks are the last breath of life before the curtain falls..." },
+                    printmaking_dawn: { title: "Artificial Dawn", desc: "Exploration of artificial light.", conceptTitle: "Boundaries", conceptDesc: "Comparing natural phenomena with urban lights." },
+                    printmaking_seasons: { title: "Four Seasons", desc: "Printmaking records of time passing.", conceptTitle: "Traces of Time", conceptDesc: "Spring, summer, autumn, winter - I care not about the changing scenery, but how light falls at different moments." },
+                    printmaking_combined: { title: "Combined Media / Moon", desc: "Exploring mixed materials.", conceptTitle: "About the Moon", conceptDesc: "Love is a moon tree..." },
+                    collage_handcraft: { title: "Handcraft Moment", desc: "Mixed media and daily fragments.", conceptTitle: "Freedom", conceptDesc: "Because I fell in love with the weight of time." },
+                    exp_record_obs: { title: "Record & Observation", desc: "Visual notes.", conceptTitle: "Ways of Seeing", conceptDesc: "No grand narratives, just recording the neglected moments." }
+                },
+                seasonSpring: "Spring", seasonSummer: "Summer", seasonAutumn: "Autumn", seasonWinter: "Winter"
+            }
+        };
+
+        let currentLang = 'zh';
+        let currentFilter = 'printmaking'; 
+
+        let lightboxActiveItems = []; 
+        let lightboxCurrentIndex = 0;  
+
+        function getAlbumItems(albumId) {
+            if (albumId === 'marcovaldo') return marcovaldoIllustrations;
+            if (albumId === 'magazine') return magazineProjects;
+            if (albumId === 'zine') return zineProjects;
+            if (albumId === 'zine_poetry') return zinePoetryProjects;
+            if (albumId === 'printmaking_fireworks') return fireworksProjects;
+            if (albumId === 'printmaking_dawn') return dawnProjects;
+            if (albumId === 'printmaking_seasons') return seasonsProjects;
+            if (albumId === 'printmaking_combined') return combinedProjects;
+            if (albumId === 'collage_handcraft') return collageProjects;
+            if (albumId === 'exp_record_obs') return recordObsProjects;
+            return [];
+        }
+
+        function renderWorksGrid() {
+            const grid = document.getElementById('works-grid');
+            if (!grid) return;
+            grid.style.opacity = '0';
+
+            setTimeout(() => {
+                const filtered = artworks.filter(w => w.category === currentFilter);
+
+                let htmlContent = '';
+                filtered.forEach((work, index) => {
+                    const titleText = work.title[currentLang];
+                    const yearText = typeof work.year === 'object' ? (work.year[currentLang] || '') : (work.year || '');
+                    
+                    let clickAction = `openMainWorksLightbox('${work.id}')`;
+                    if (work.isAlbum) clickAction = `enterAlbum('${work.id}')`;
+
+                    const albumBadge = work.isAlbum 
+                        ? `<span class="absolute top-4 left-4 bg-stone-900/80 text-[#F5F2EB] text-[9px] uppercase tracking-widest px-2 py-1 rounded shadow-sm">Collection / Album</span>` 
+                        : '';
+
+                    const dynamicStaggerClass = (index % 2 === 1) ? 'md:mt-12' : '';
+                    const aspectClass = work.aspect || 'aspect-[4/3]';
+
+                    // 处理骨架屏包裹类
+                    const minHClass = aspectClass === 'aspect-auto' ? 'min-h-[15rem]' : '';
+                    const bgClass = aspectClass === 'aspect-auto' ? `skeleton-bg ${minHClass}` : 'skeleton-bg';
+
+                    let imgClass = 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-102 opacity-0';
+                    if (aspectClass === 'aspect-auto') {
+                        imgClass = 'w-full h-auto block transition-transform duration-700 group-hover:scale-102 opacity-0'; 
+                    }
+
+                    // 添加 onload 处理：图片加载后移除 opacity-0，并移除父级的骨架屏闪烁
+                    let imgRenderHTML = `<img src="${work.img}" class="grayscale-img ${imgClass}" alt="${titleText}" loading="lazy" decoding="async" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton-bg', 'min-h-[15rem]');" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">`;
+                    
+                    if (work.id === 'magazine') {
+                        imgRenderHTML = `
+                            <div class="p-6 md:p-10 flex items-center justify-center h-full w-full relative z-10">
+                                <img src="${work.img}" class="w-full h-auto shadow-lg grayscale-img opacity-0" alt="${titleText}" loading="lazy" decoding="async" onload="this.classList.remove('opacity-0'); this.parentElement.parentElement.classList.remove('skeleton-bg'); this.parentElement.classList.add('bg-stone-100');">
+                            </div>
+                        `;
+                    }
+
+                    const borderClass = aspectClass === 'aspect-auto' ? '' : 'border border-stone-200/50';
+
+                    htmlContent += `
+                        <div class="work-card group cursor-pointer relative flex flex-col justify-center ${dynamicStaggerClass}" onclick="${clickAction}">
+                            <div class="overflow-hidden rounded-lg mb-4 ${aspectClass} ${borderClass} ${bgClass} relative">
+                                ${imgRenderHTML}
+                                ${albumBadge}
+                            </div>
+                            <div class="flex justify-between items-baseline px-1">
+                                <h3 class="font-serif-art text-sm text-stone-800 transition-colors group-hover:text-stone-500">${titleText}</h3>
+                                <span class="text-[10px] text-stone-400 font-light ml-3 whitespace-nowrap">${yearText}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                grid.innerHTML = htmlContent || `<div class="col-span-2 text-center text-xs text-stone-400 py-12 font-serif-art">暂无相关作品 · Nessuna Opera</div>`;
+                grid.style.opacity = '1';
+            }, 300);
+        }
+
+        function openMainWorksLightbox(workId) {
+            const filteredNonAlbums = artworks.filter(w => !w.isAlbum && w.category === currentFilter);
+            
+            lightboxActiveItems = filteredNonAlbums.map(w => {
+                const yearText = typeof w.year === 'object' ? (w.year[currentLang] || '') : (w.year || '');
+                return { img: w.img, title: w.title[currentLang], meta: yearText, genre: w.category.toUpperCase() };
+            });
+
+            const selectedItem = filteredNonAlbums.find(w => w.id === workId);
+            lightboxCurrentIndex = filteredNonAlbums.indexOf(selectedItem);
+            if (lightboxCurrentIndex === -1) lightboxCurrentIndex = 0;
+
+            openLightboxModal();
+        }
+
+        function updateAlbumTexts() {
+            const data = i18n[currentLang].albums[currentAlbumId] || i18n[currentLang].albums['marcovaldo'];
+            document.getElementById('album-main-title').innerText = data.title || '';
+            document.getElementById('album-main-desc').innerHTML = data.desc || '';
+            document.getElementById('album-concept-title').innerText = data.conceptTitle || '';
+            document.getElementById('album-concept-desc').innerHTML = data.conceptDesc || '';
+
+            const backBtnText = document.getElementById('back-to-portfolio-text');
+            if (currentAlbumId === 'zine_poetry') {
+                backBtnText.innerText = currentLang === 'zh' ? '返回 Zine' : (currentLang === 'it' ? 'Torna a Zine' : 'Back to Zine');
+            } else {
+                backBtnText.innerText = i18n[currentLang].backToPortfolio;
+            }
+        }
+
+        function enterAlbum(albumId, isBacking = false) {
+            currentAlbumId = albumId;
+            updateAlbumTexts();
+
+            if (!isBacking) document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
+
+            const mainView = document.getElementById('main-portfolio-view');
+            const albumView = document.getElementById('album-view');
+
+            if (!albumView.classList.contains('hidden')) {
+                const grid = document.getElementById('album-grid');
+                grid.style.opacity = '0';
+                setTimeout(() => {
+                    renderAlbumGrid();
+                    grid.style.opacity = '1';
+                }, 300);
+                return;
+            }
+
+            mainView.style.opacity = '0';
+            setTimeout(() => {
+                mainView.classList.add('hidden');
+                albumView.classList.remove('hidden');
+                renderAlbumGrid();
+                setTimeout(() => {
+                    albumView.style.opacity = '1';
+                }, 50);
+            }, 300);
+        }
+
+        function exitAlbum() {
+            if (currentAlbumId === 'zine_poetry') {
+                enterAlbum('zine', true);
+                return;
+            }
+
+            document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
+
+            const mainView = document.getElementById('main-portfolio-view');
+            const albumView = document.getElementById('album-view');
+
+            albumView.style.opacity = '0';
+            setTimeout(() => {
+                albumView.classList.add('hidden');
+                mainView.classList.remove('hidden');
+                renderWorksGrid();
+                setTimeout(() => {
+                    mainView.style.opacity = '1';
+                }, 50);
+            }, 300);
+        }
+
+        function renderAlbumGrid() {
+            const grid = document.getElementById('album-grid');
+            if (!grid) return;
+
+            let htmlContent = '';
+            const items = getAlbumItems(currentAlbumId);
+            
+            let useMasonry = true; 
+            // 修改：对杂志排版强制移除瀑布流，使用规则整齐网格
+            if (currentAlbumId === 'marcovaldo' || currentAlbumId === 'magazine') useMasonry = false;
+
+            if (useMasonry) {
+                grid.className = 'columns-1 sm:columns-2 md:columns-3 gap-8 space-y-8';
+            } else {
+                if (currentAlbumId === 'magazine') {
+                    // 修改：杂志用两列显示以产生左右对称感
+                    grid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12';
+                } else {
+                    grid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8';
+                }
+            }
+
+            items.forEach((item, index) => {
+                const titleText = item.title[currentLang] || "";
+                let currentImg = item.img || '3.jpg'; 
+
+                let tagHTML = '';
+                if (currentAlbumId === 'marcovaldo') {
+                    tagHTML = `<span class="absolute bottom-3 right-3 bg-stone-900/10 text-stone-800/65 font-mono text-[9px] px-1.5 py-0.5 rounded backdrop-blur-xs group-hover:opacity-0 transition-opacity">CH ${item.ch}</span>`;
+                }
+
+                let topTag = currentAlbumId.split('_')[0].toUpperCase();
+                if (currentAlbumId === 'marcovaldo') topTag = i18n[currentLang][`season${item.season === '春' ? 'Spring' : item.season === '夏' ? 'Summer' : item.season === '秋' ? 'Autumn' : 'Winter'}`];
+                if (currentAlbumId === 'zine' || currentAlbumId === 'zine_poetry') topTag = 'ZINE PROJECT';
+                if (currentAlbumId === 'magazine') topTag = 'MAGAZINE';
+                if (currentAlbumId === 'exp_record_obs') topTag = 'OBSERVATION';
+
+                // 增加骨架屏类
+                const wrapperClass = useMasonry 
+                    ? 'group relative overflow-hidden rounded-lg border border-stone-200/50 cursor-pointer inline-block w-full break-inside-avoid shadow-sm hover:shadow-md transition-shadow skeleton-bg min-h-[15rem]'
+                    : 'group relative overflow-hidden rounded-lg border border-stone-200/50 aspect-[3/4] cursor-pointer flex items-center justify-center skeleton-bg';
+
+                // 图片透明，并通过 transition-all 实现淡入
+                const imgClass = useMasonry
+                    ? 'w-full h-auto block transition-all duration-700 group-hover:scale-105 opacity-0'
+                    : 'w-full h-full object-cover transition-all duration-700 group-hover:scale-102 opacity-0';
+
+                let overlayHTML = '';
+                if (titleText !== "") {
+                    overlayHTML = `
+                        <div class="mogu-overlay absolute inset-0 opacity-0 group-hover:opacity-100 flex flex-col justify-between p-6 text-center transition-opacity duration-300">
+                            <div class="text-[9px] tracking-widest text-stone-400 font-light uppercase">${topTag}</div>
+                            <h3 class="font-serif-art text-xs md:text-sm tracking-wide text-stone-800 leading-relaxed font-light px-2 my-auto">${titleText}</h3>
+                            <div class="text-[8px] tracking-widest text-stone-400 uppercase font-light">HU ANGELA YEHUA</div>
+                        </div>
+                    `;
+                } else {
+                    overlayHTML = `<div class="absolute inset-0 bg-stone-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>`;
+                }
+
+                // 添加 onload 淡入和骨架屏移除逻辑
+                htmlContent += `
+                    <div class="${wrapperClass}" onclick="openAlbumLightbox(${index})">
+                        <img src="${currentImg}" class="${imgClass}" alt="${titleText}" loading="lazy" decoding="async" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton-bg', 'min-h-[15rem]');" onerror="this.onerror=null; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
+                        ${tagHTML}
+                        ${overlayHTML}
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = htmlContent;
+        }
+
+        function openAlbumLightbox(index) {
+            const items = getAlbumItems(currentAlbumId);
+            const selectedItem = items[index];
+
+            if (selectedItem.isSubAlbum) {
+                enterAlbum(selectedItem.subAlbumId, true);
+                return;
+            }
+
+            if (selectedItem.isDirectLightbox) {
+                lightboxActiveItems = [{
+                    img: selectedItem.lightboxImg || selectedItem.img,
+                    title: selectedItem.title[currentLang],
+                    meta: '',
+                    genre: currentAlbumId.toUpperCase()
+                }];
+                lightboxCurrentIndex = 0;
+                openLightboxModal();
+                return;
+            }
+
+            lightboxActiveItems = items.map((item, i) => {
+                let genre = currentAlbumId.split('_')[0].toUpperCase();
+                let meta = item.title[currentLang];
+                
+                if (currentAlbumId === 'marcovaldo') {
+                    genre = i18n[currentLang][`season${item.season === '春' ? 'Spring' : item.season === '夏' ? 'Summer' : item.season === '秋' ? 'Autumn' : 'Winter'}`];
+                    meta = `Marcovaldo · CH ${item.ch}`;
+                }
+                if (currentAlbumId === 'exp_record_obs') {
+                    genre = "NOTE";
+                    meta = `Record No.${i+1}`;
+                }
+
+                return { img: item.img || '3.jpg', title: item.title[currentLang], meta: meta, genre: genre };
+            });
+
+            lightboxCurrentIndex = index;
+            openLightboxModal();
+        }
+
+        function openLightboxModal() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            document.addEventListener('keydown', handleLightboxKeyboard);
+            updateLightboxContent();
+        }
+
+        function updateLightboxContent() {
+            if (lightboxActiveItems.length === 0) return;
+            const currentItem = lightboxActiveItems[lightboxCurrentIndex];
+
+            const img = document.getElementById('lightbox-img');
+            const title = document.getElementById('lightbox-title');
+            const meta = document.getElementById('lightbox-meta');
+            const genre = document.getElementById('lightbox-genre');
+
+            // 恢复灯箱大图的骨架屏状态
+            img.classList.add('opacity-0');
+            const imgWrapper = document.getElementById('lightbox-img-wrapper');
+            imgWrapper.classList.add('skeleton-bg-dark');
+
+            img.onload = function() {
+                this.classList.remove('opacity-0');
+                imgWrapper.classList.remove('skeleton-bg-dark');
+            };
+
+            img.src = currentItem.img;
+            title.innerText = currentItem.title;
+            meta.innerText = currentItem.meta;
+            genre.innerText = currentItem.genre.toUpperCase();
+
+            const prevBtn = document.getElementById('lightbox-prev-btn');
+            const nextBtn = document.getElementById('lightbox-next-btn');
+            if (lightboxActiveItems.length <= 1) {
+                prevBtn.classList.add('hidden'); nextBtn.classList.add('hidden');
+            } else {
+                prevBtn.classList.remove('hidden'); nextBtn.classList.remove('hidden');
+            }
+
+            resetZoom();
+        }
+
+        function navigateLightbox(direction) {
+            if (lightboxActiveItems.length === 0) return;
+            lightboxCurrentIndex += direction;
+            if (lightboxCurrentIndex >= lightboxActiveItems.length) lightboxCurrentIndex = 0; 
+            else if (lightboxCurrentIndex < 0) lightboxCurrentIndex = lightboxActiveItems.length - 1; 
+            updateLightboxContent();
+        }
+
+        function handleLightboxKeyboard(e) {
+            const modal = document.getElementById('lightbox-modal');
+            if (modal.classList.contains('hidden')) return;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') navigateLightbox(1);
+            else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') navigateLightbox(-1);
+            else if (e.key === 'Escape') closeLightbox();
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden'); modal.classList.remove('flex');
+            document.removeEventListener('keydown', handleLightboxKeyboard);
+        }
+
+        function zoomImage(e) {
+            const container = e.currentTarget;
+            const img = container.querySelector('.zoom-img');
+            const rect = container.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            img.style.transformOrigin = `${x}% ${y}%`;
+            img.style.transform = 'scale(2.2)';
+        }
+
+        function resetZoom() {
+            const img = document.getElementById('lightbox-img');
+            if (img) { img.style.transform = 'scale(1)'; img.style.transformOrigin = 'center center'; }
+        }
+
+        function filterWorks(category) {
+            if (category === currentFilter) return;
+            currentFilter = category;
+            const albumView = document.getElementById('album-view');
+            if (!albumView.classList.contains('hidden')) exitAlbum();
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active-filter'));
+            document.getElementById(`filter-${category}`).classList.add('active-filter');
+            renderWorksGrid();
+        }
+
+        function changeLanguage(lang) {
+            if (lang === currentLang) return;
+            currentLang = lang;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active-lang'));
+            const mobileBtn = document.getElementById(`lang-${lang}`);
+            if (mobileBtn) mobileBtn.classList.add('active-lang');
+            const desktopBtn = document.getElementById(`sidebar-lang-${lang}`);
+            if (desktopBtn) desktopBtn.classList.add('active-lang');
+
+            const transElements = [
+                'nav-logo', 'sidebar-logo', 'cover-text', 'scroll-text', 
+                'menu-label-explore', 'menu-home', 'menu-works', 'menu-about', 'menu-contact',
+                'sidebar-home', 'sidebar-works', 'sidebar-about', 'sidebar-contact',
+                'sec-works-title', 'about-subtitle', 'about-title', 'about-desc', 'contact-title', 'contact-desc',
+                'wechat-modal-title', 'wechat-modal-desc', 'contact-xhs-text', 'contact-wechat-text', 'contact-email-label',
+                'filter-printmaking', 'filter-collage', 'filter-illustration', 'filter-experimental',
+                'back-to-portfolio-text', 'album-main-title', 'album-main-desc', 'album-concept-title', 'album-concept-desc'
+            ];
+
+            transElements.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.opacity = '0';
+            });
+
+            setTimeout(() => {
+                const data = i18n[lang];
+                
+                document.getElementById('nav-logo').innerText = data.logo;
+                document.getElementById('sidebar-logo').innerText = data.logo;
+                document.getElementById('cover-text').innerText = data.cover;
+                
+                const isScrolled = window.scrollY > 300;
+                document.getElementById('scroll-text').innerText = isScrolled ? data.scrollUp : data.scroll;
+                
+                document.getElementById('menu-label-explore').innerText = data.menuExplore;
+                document.getElementById('menu-home').innerText = data.menuHome;
+                document.getElementById('menu-works').innerText = data.menuWorks;
+                document.getElementById('menu-about').innerText = data.menuAbout;
+                document.getElementById('menu-contact').innerText = data.menuContact;
+
+                document.getElementById('sidebar-home').innerText = data.menuHome;
+                document.getElementById('sidebar-works').innerText = data.menuWorks;
+                document.getElementById('sidebar-about').innerText = data.menuAbout;
+                document.getElementById('sidebar-contact').innerText = data.menuContact;
+
+                document.getElementById('sec-works-title').innerText = data.secWorksTitle;
+                document.getElementById('about-subtitle').innerText = data.aboutSubtitle;
+                document.getElementById('about-title').innerText = data.aboutTitle;
+                document.getElementById('about-desc').innerHTML = data.aboutDesc;
+                document.getElementById('contact-title').innerText = data.contactTitle;
+                document.getElementById('contact-desc').innerText = data.contactDesc;
+
+                document.getElementById('wechat-modal-title').innerText = data.wechatTitle;
+                document.getElementById('wechat-modal-desc').innerText = data.wechatDesc;
+                document.getElementById('contact-xhs-text').innerText = data.contactXhs;
+                document.getElementById('contact-wechat-text').innerText = data.contactWechat;
+                document.getElementById('contact-email-label').innerText = data.contactEmailLabel;
+
+                document.getElementById('filter-printmaking').innerText = data.filterPrintmaking;
+                document.getElementById('filter-collage').innerText = data.filterCollage;
+                document.getElementById('filter-illustration').innerText = data.filterIllustration;
+                document.getElementById('filter-experimental').innerText = data.filterExperimental;
+
+                updateAlbumTexts();
+                renderWorksGrid();
+                
+                if (!document.getElementById('album-view').classList.contains('hidden')) {
+                    renderAlbumGrid();
+                }
+
+                transElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.opacity = '';
+                });
+            }, 400);
+        }
+
+        function copyEmailAddress() {
+            const email = "angelayehua.hu.studenti@ababo.it";
+            const textarea = document.createElement("textarea");
+            textarea.value = email; textarea.style.top = "0"; textarea.style.left = "0"; textarea.style.position = "fixed";
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                const toast = document.getElementById('copy-toast');
+                toast.innerText = i18n[currentLang].copied;
+                toast.classList.remove('opacity-0'); toast.classList.add('opacity-100');
+                setTimeout(() => { toast.classList.remove('opacity-100'); toast.classList.add('opacity-0'); }, 2000);
+            } catch (err) { console.error('Copy Error: ', err); }
+            document.body.removeChild(textarea);
+        }
+
+        function toggleWeChatModal(show) {
+            const modal = document.getElementById('wechat-modal');
+            const content = document.getElementById('wechat-modal-content');
+            if (show) {
+                modal.classList.remove('opacity-0', 'pointer-events-none'); modal.classList.add('opacity-100', 'pointer-events-auto');
+                content.classList.remove('scale-95'); content.classList.add('scale-100');
+            } else {
+                modal.classList.remove('opacity-100', 'pointer-events-auto'); modal.classList.add('opacity-0', 'pointer-events-none');
+                content.classList.remove('scale-100'); content.classList.add('scale-95');
+            }
+        }
+
+        let isMenuOpen = false;
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            const body = document.body;
+            const drawer = document.getElementById('menu-drawer');
+            const backdrop = document.getElementById('menu-backdrop');
+
+            if (isMenuOpen) {
+                body.classList.add('menu-open', 'overflow-hidden');
+                drawer.classList.remove('-translate-x-full'); drawer.classList.add('translate-x-0');
+                backdrop.classList.remove('pointer-events-none', 'opacity-0'); backdrop.classList.add('pointer-events-auto', 'opacity-100');
+            } else {
+                body.classList.remove('menu-open', 'overflow-hidden');
+                drawer.classList.remove('translate-x-0'); drawer.classList.add('-translate-x-full');
+                backdrop.classList.remove('pointer-events-auto', 'opacity-100'); backdrop.classList.add('pointer-events-none', 'opacity-0');
+            }
+        }
+
+        function initHomeImageHover() {
+            const homeImg = document.getElementById('home-main-img');
+            if (homeImg) homeImg.addEventListener('mouseenter', () => homeImg.classList.add('keep-color'));
+        }
+
+        function initScrollIndicator() {
+            const indicator = document.getElementById('scroll-indicator');
+            const scrollText = document.getElementById('scroll-text');
+            const linesBox = document.getElementById('scroll-lines-box');
+            if (!indicator || !scrollText || !linesBox) return;
+
+            indicator.addEventListener('click', () => {
+                if (window.scrollY > 300) window.scrollTo({ top: 0, behavior: 'smooth' });
+                else { const section = document.getElementById('works'); if (section) section.scrollIntoView({ behavior: 'smooth' }); }
+            });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollText.innerText = i18n[currentLang].scrollUp;
+                    linesBox.style.transform = 'rotate(180deg)'; 
+                } else {
+                    scrollText.innerText = i18n[currentLang].scroll;
+                    linesBox.style.transform = 'rotate(0deg)'; 
+                }
+            });
+        }
+
+        // 将 window.onload 改为 DOMContentLoaded，不需要等所有图片都下载完就可以结束 Loading 动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('loader');
+            const welcomeText = document.getElementById('welcome-text');
+            
+            renderWorksGrid();
+            initHomeImageHover();
+            initScrollIndicator();
+
+            setTimeout(() => { welcomeText.classList.remove('opacity-0'); }, 200);
+            
+            setTimeout(() => {
+                loader.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => { loader.style.display = 'none'; }, 500);
+            }, 800); // 整体骨架加载后，800ms就消失，速度更快
+        });
+    </script>
+</body>
+</html>
